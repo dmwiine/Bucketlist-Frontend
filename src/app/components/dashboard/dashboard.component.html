@@ -1,0 +1,65 @@
+<div class="col-lg-7">
+    <!--<div class="row col-lg-12" style="padding: 10px;">
+        <div class="col-lg-10">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for bucketlist...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Go!</button>
+                </span>
+            </div>
+        </div>
+    </div>-->
+    <!--<div> You have no bucketlists {{bucketlists}} </div>-->
+     
+    <app-bucketlist></app-bucketlist>
+    <div class="col-lg-12" *ngIf="bucketlists?.length == 0">
+        <div class="well well-lg">
+            <p>You have no bucketlists!! Do create a few :)</p>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <ul class="pagination">
+                <li *ngIf="!pagination.has_prev" class="btn disabled" ><a href="javascript: void(0)"> << </a></li>
+                <li *ngIf="pagination.has_prev" (click)="getPaginatedBuckets(pagination.prev_num)" class="btn waves-effect" ><a href="javascript: void(0)"> << </a></li>
+                <li *ngIf="pagination.has_next" (click)="getPaginatedBuckets(pagination.next_num)" class="btn waves-effect"><a href="javascript: void(0)"> >> </a></li>
+                <li *ngIf="!pagination.has_next" class="btn disabled"><a href="javascript: void(0)"> >> </a></li>
+        </ul> 
+    </div>
+    <div class="col-lg-12" *ngFor="let bucketlist of bucketlists">
+        <div class="panel panel-info">
+            <div class="panel-heading" (click)="bucketlistClick(bucketlist)">
+                <b>{{ bucketlist.name }}</b>
+                </div>
+            <table class="table">
+                <!-- <tr><td> {{ bucketlist.name }} </td></tr> -->
+                <tr>
+                     <td> Created On: {{ bucketlist.date_created | date: 'dd-MM-yyyy' }} </td> 
+                    <td>
+                            <app-edit-bucketlist [bucketlist]="bucketlist"></app-edit-bucketlist>
+                            </td>
+                        <td>
+                            <app-add-item [bucketlist]="bucketlist"></app-add-item>
+                            </td>
+                        <td>
+                             <button (click)="deleteBucketlist(bucketlist.id)" class="btn btn-sm btn-default">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button> 
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <ul class="pagination">
+                <li *ngIf="!pagination.has_prev" class="btn disabled" ><a href="javascript: void(0)"> << </a></li>
+                <li *ngIf="pagination.has_prev" (click)="getPaginatedBuckets(pagination.prev_num)" class="btn waves-effect" ><a href="javascript: void(0)"> << </a></li>
+                <li *ngIf="pagination.has_next" (click)="getPaginatedBuckets(pagination.next_num)" class="btn waves-effect"><a href="javascript: void(0)"> >> </a></li>
+                <li *ngIf="!pagination.has_next" class="btn disabled"><a href="javascript: void(0)"> >> </a></li>
+        </ul> 
+    </div>
+</div>
+
+<div class="col-lg-5">
+    <app-item [bucketlist]="selectedBucketlist"></app-item>
+    <!--<app-item></app-item>-->
+</div>

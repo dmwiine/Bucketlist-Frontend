@@ -1,0 +1,26 @@
+<button class="btn btn-sm btn-default" (click)="createItemModal.open()">
+  <span class="glyphicon glyphicon-tasks"></span>
+</button>
+<form id="item-form" method="post" (ngSubmit)="createItem.form.valid && submitItem()" #createItem="ngForm" role="form" novalidate>
+  <modal #createItemModal>
+    <modal-header>
+      Create new Bucketlist Item
+    </modal-header>
+    <modal-content>
+      <div class="form-group">
+          <input type="text" [(ngModel)]="model.name" name="name" class="form-control" placeholder="Item name" value=""/>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" [(ngModel)]="model.done" name="done" class="form-check-input" value="">
+          Done
+        </label>
+        </div>
+      <div class="alert alert-danger" role="alert" *ngIf="errMsg">{{ errMsg }}</div>
+    </modal-content>
+    <modal-footer>
+      <input type="submit" name="item-submit" class="btn btn-success" value="Submit">
+      <button class="btn btn-primary" (click)="createItemModal.close()" #closeBtn>close</button>
+    </modal-footer>
+  </modal>
+</form>

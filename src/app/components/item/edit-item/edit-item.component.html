@@ -1,0 +1,26 @@
+<button class="btn btn-sm btn-default" (click)="editItemModal.open()">
+  <span class="glyphicon glyphicon-edit"></span>
+</button>
+<form id="edit-item-form" method="post" (ngSubmit)="editItem.form.valid && updateItem()" #editItem="ngForm" role="form" novalidate>
+  <modal #editItemModal>
+    <modal-header>
+      Edit Bucketlist Item
+    </modal-header>
+    <modal-content>
+       <div class="form-group">
+          <input type="text" [(ngModel)]="model.name" name="name" class="form-control" placeholder="Item name" value=""/>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" [(ngModel)]="model.done" name="done" class="form-check-input" value="">
+          Done
+        </label>
+        </div>
+      <div class="alert alert-danger" role="alert" *ngIf="errMsg">{{ errMsg }}</div>
+    </modal-content>
+    <modal-footer>
+      <input type="submit" name="bucketlist-submit" class="btn btn-success" value="Update">
+      <button class="btn btn-primary" (click)="editItemModal.close()" #closeItemEdit>close</button>
+    </modal-footer>
+  </modal>
+</form>
